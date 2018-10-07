@@ -6,12 +6,12 @@
 
 ## Configure
 
-1. Modify the datase connection object
-     /system/db/Config.class.php
-     DB_SERVER - Server to connect to
-     DB_DATABASE - Database to connect to
-     DB_USER - Database user
-     DB_PASS - Database password
+1. Modify the database connection object
+  -   /system/db/Config.class.php
+  -   DB_SERVER - Server to connect to
+  -   DB_DATABASE - Database to connect to
+  -   DB_USER - Database user
+  -   DB_PASS - Database password
 
 ## Usage
 - CLI
