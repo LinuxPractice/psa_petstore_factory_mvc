@@ -14,7 +14,7 @@
   -   DB_PASS - Database password
 
 ## Usage
-- CLI
+### CLI
 List all products 
     [php index.php]
 Online help is available
@@ -38,7 +38,7 @@ attribute value can be: [persian,5,8,brown,100,siamese,3,black,2,sphynx,7,
  pitbull,10,terrier,irish setter,red,tortoise,65,99,python,frog,gecko, 
  alligator,50,,green,plastic,yellow,hemp,6,rubber,36,metal,24,34] 
 
- - Webserver
+### Webserver
   
 Place project under the document root
 
