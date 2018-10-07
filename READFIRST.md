@@ -22,35 +22,43 @@ Online help is available
 
 
 usage: php index.php [name=value]  
-```
+   ```
    example [php index.php type=toy attribute=plastic attributename=material]
    ```
 name can be one of 
+
+ ```
  sort type price 
+ ```
+ 
  Attribute searches require both name and value 
  attribute=value attributename=value 
-sort value can be: 
+ 
+sort value can be one of: 
 ```
-  [nameasc, namedesc, typeasc, typedesc, priceasc, pricedesc, ageasc,
- agedesc, lifespanasc, lifespandesc] 
+nameasc, namedesc, typeasc, typedesc, priceasc, pricedesc, ageasc,
+ agedesc, lifespanasc, lifespandesc
  ```
-type value can be:
+type value can be one of:
 ```
-[cat, dog, reptile, toy, carrier] 
+cat, dog, reptile, toy, carrier 
 ```
 price can be an integer or float with no '$' or ','  
+
 attributename value can be:  
 ```
-[breed,age,lifespan,color,salePrice,species,
- material,size,weight,width,height ]  
+breed,age,lifespan,color,salePrice,species,
+ material,size,weight,width,height  
  ```
-attribute value can be: 
+attribute value can be one of: 
 ```
-[persian,5,8,brown,100,siamese,3,black,2,sphynx,7, 
+persian,5,8,brown,100,siamese,3,black,2,sphynx,7, 
  orange,munchkin,1,white,pekingese,4,14,bulldog,12,brindle, 
  pitbull,10,terrier,irish setter,red,tortoise,65,99,python,frog,gecko, 
- alligator,50,,green,plastic,yellow,hemp,6,rubber,36,metal,24,34] 
+ alligator,50,,green,plastic,yellow,hemp,6,rubber,36,metal,24,34 
 ```
+An attributename and attribute value pair is required to search by attribute
+
 ### Webserver
   
 Place project under the document root.  make sure PHP 7.2 and MySQL are installed
