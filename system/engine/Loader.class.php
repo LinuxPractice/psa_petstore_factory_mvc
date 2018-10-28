@@ -23,6 +23,7 @@ class Loader
      */
     public function loadView(string $view, array $pageData = NULL)
     {
+        $view = strtolower($view);
         $viewpath = $this->themepath . $view . '.php';
         if (file_exists($viewpath)) {
             require ($viewpath);
@@ -37,8 +38,10 @@ class Loader
      * @param array $pageData
      * @return object
      */
-    public function loadController(string $controller, array $pageData = NULL,  $request): object
+    public function loadController(Router $router, array $pageData = NULL, $request): object
     {
+        $controller = $router->getRoute();
+        
         $controllerpath = 'app/controller/' . $controller . '.class.php';
         if (file_exists($controllerpath)) {
             require ($controllerpath);

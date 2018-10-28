@@ -7,7 +7,8 @@ if (version_compare(phpversion(), '7.2.0', '<') == true) {
 /* End Check Version */
 
 /* Use */
-use \system\engine\Loader;
+use system\engine\Loader;
+use system\engine\Router;
 use data\ProductObjectCreator;
 /* End Use */
 
@@ -15,10 +16,10 @@ use data\ProductObjectCreator;
 include ('AutoLoader.class.php');
 $autoload = new \autoLoader();
 /* End auto loader */
-
+$isCli = false;
 /* Check for cli. set $_GET */
 if (php_sapi_name() === 'cli') {
-   
+    
     if (count($argv) == 2 && strtolower($argv[1]) == 'help') {
         echo "
 usage: php index.php [name=value]  \n
@@ -41,43 +42,33 @@ attribute value can be: [persian,5,8,brown,100,siamese,3,black,2,sphynx,7, \n
         exit();
     }
     parse_str(implode('&', array_slice($argv, 1)), $_GET);
-    
-    $_GET['route'] = 'index';
-   // exit;
+    $isCli = true;
+    $_SERVER['REQUEST_URI'] = '';
 }
 
 /* Setup page data array */
 $pageData = Array();
 /* End Setup page data array */
 
-/* Set theme for CLI */
-if (php_sapi_name() === 'cli') {
-    $pageData['themepath'] = 'app/view/themes/cli/';
-} else {
-    $pageData['themepath'] = 'app/view/themes/default/';
-}
-/* End Set theme for CLI */
-
-
-
 /* only for initial object creation */
 /* running this will populate the database with products */
 /* running this again will populate the database with the same products */
 /* Must set the parameter to TRUE if you run */
-/* 
-
-$createProductObjects = new ProductObjectCreator(FALSE);
-$createProductObjects->showCreatedClasses();
-*/ 
+/*
+ *
+ * $createProductObjects = new ProductObjectCreator(FALSE);
+ * $createProductObjects->showCreatedClasses();
+ */
 /* End only for initial object creation */
 
+/* Router */
+$router = new Router($_SERVER['REQUEST_URI'], $isCli);
+/* End router */
 
-/* Create a class to hold the request route */
+/* Create a class to hold the request */
 $request = new stdClass();
-$request->route = 'search';
-if (! empty($_GET['route'])) {
-    $request->route = filter_var($_GET['route'], FILTER_SANITIZE_STRING);
-}
+$request->route = $router->getRoute();
+
 if (! empty($_GET['sort'])) {
     $request->sort = filter_var($_GET['sort'], FILTER_SANITIZE_STRING);
 }
@@ -95,15 +86,21 @@ if (! empty($_GET['type'])) {
 }
 /* End request class */
 
-
-
 /* Load views */
 $loader = new Loader();
-$loader->themepath = $pageData['themepath'];
-$controller = $loader->loadController('Index', $pageData, $request);
+$loader->themepath = $router->getThemePath();
+$controller = $loader->loadController($router, $pageData, $request);
 /* Load views */
 $loader->loadView('common/header');
-$pageData['body'] = $controller->index();
-$loader->loadView('index', $pageData['body']);
+
+/* if method from route exists, execute it otherwise call the entry point@*/
+/* TODO move into loader */
+if (method_exists($controller, $router->getMethod())) {
+    $pageData['body'] = $controller->{$router->getMethod()}();
+} else {
+    /* Default */
+    $pageData['body'] = $controller->index();
+}
+$loader->loadView($router->getRoute(), $pageData['body']);
 $loader->loadView('common/footer');
 /* End Load views */
