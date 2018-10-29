@@ -12,6 +12,14 @@
   -   DB_DATABASE - Database to connect to
   -   DB_USER - Database user
   -   DB_PASS - Database password
+2. .htaccess
+```
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !(\.png|\.jpg|\.gif|\.jpeg|\.bmp)$
+RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]
+```
 
 ## Usage
 ### CLI
