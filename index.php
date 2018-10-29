@@ -84,6 +84,11 @@ if (! empty($_GET['price'])) {
 if (! empty($_GET['type'])) {
     $request->typeFilter = filter_var(strtolower($_GET['type']), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 }
+
+if (! empty($_GET['searchterm'])) {
+    $request->searchString = filter_var(strtolower($_GET['searchterm']), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+}
+
 /* End request class */
 
 /* Load views */

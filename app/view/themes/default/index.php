@@ -1,9 +1,11 @@
-<div class="" style="width:100%;">
-<div><?php 
-if (! empty($pageData['num_rows'])){
+<div class="" style="width: 100%;">
+	<div><?php
+if (! empty($pageData['num_rows'])) {
     echo "Found {$pageData['num_rows']}";
-}?>
+}
+?>
 </div>
+<div class="row">
 <?php
 
 if ($pageData['num_rows'] > 0) {
@@ -14,4 +16,5 @@ if ($pageData['num_rows'] > 0) {
     echo 'We are sorry, the search returned no results, please search again ';
 }
 ?>
+</div>
 </div>

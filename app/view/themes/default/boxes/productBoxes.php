@@ -1,12 +1,12 @@
-<div class="quarter floatleft">
-    <div class="productbox  ">
+<div class="col-sm-6 col-xs-6 col-md-4 col-lg-3">
+    <div class=" border border-danger p-2 m-2 ">
     	<h2 class="mar5tb"><?=$v->product_name; ?></h2>
     	<h3 class="mar5tb">Price:<?php
         if (! empty($v->salePrice)) {
             echo '<strike>' . sprintf(" $%01.2f", $v->product_price) . '</strike><br>';
             echo '<b style="color:red">' . sprintf("On Sale: $%01.2f", $v->salePrice) . '</b>';
         } else {
-            echo sprintf("Price: $%01.2f", $v->product_price);;
+            echo sprintf(" $%01.2f", $v->product_price);;
         }
         ?>
         </h3>

@@ -49,6 +49,13 @@ class ProductSearch extends AbstractModel
     private $whereAdditionalClause;
 
     /**
+     * Search term to look for
+     *
+     * @var string
+     */
+    private $whereSearchClause;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -106,6 +113,7 @@ class ProductSearch extends AbstractModel
             $this->wherePriceClause
             $this->whereTypeClause
             $this->whereAdditionalClause
+            $this->whereSearchClause
             group by p.product_id  
             $this->sort ;";
         /* change to 1==1 to view query */
@@ -153,6 +161,39 @@ class ProductSearch extends AbstractModel
     {
         if (! empty($typeFilter)) {
             $this->whereTypeClause = " AND LOWER(p.product_type) LIKE '%$typeFilter%' ";
+        }
+    }
+
+    /**
+     * Set product type for searches.
+     * This generates a where clause
+     *
+     * @param string $typeFilter
+     */
+    public function setSearchString(string $searchString)
+    {
+        if (! empty($searchString)) {
+            
+            $searchStringArray = explode(" ", $searchString);
+            
+            if (! empty($searchStringArray[0])) {
+                foreach ($searchStringArray as $k => $v) {
+                    $this->whereSearchClause .= " AND (SOUNDEX(p.product_type) = SOUNDEX('$v')
+            OR SOUNDEX(ptav.attribute_value) = SOUNDEX('$v') 
+            OR SOUNDEX(ptav.attribute_name) = SOUNDEX('$v') )  ";
+                }
+            }
+            
+            $searchStringComb = implode("','",$searchStringArray );
+            $this->whereSearchClause .= " OR ptav.attribute_value IN ('$searchStringComb') ";
+            
+            
+            // $this->whereSearchClause = " AND (SOUNDEX(p.product_type) = SOUNDEX('$searchString')
+            // OR SOUNDEX(ptav.attribute_value) = SOUNDEX('$searchString') ) ";
+            /*
+             * $this->whereSearchClause = " AND (LOWER(p.product_type) LIKE '%$searchString%'
+             * OR LOWER(ptav.attribute_value) LIKE '%$searchString%') ";
+             */
         }
     }
 

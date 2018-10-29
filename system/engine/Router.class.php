@@ -52,6 +52,10 @@ class Router
                         $this->setRoute('Index');
                         $this->setThemePath('xml');
                         break;
+                    case 'react':
+                        $this->setRoute('Index');
+                        $this->setThemePath('react');
+                        break;
                     default:
                         $this->setRoute('Index');
                         $this->setThemePath('default');

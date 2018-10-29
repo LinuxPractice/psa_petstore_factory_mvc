@@ -56,6 +56,11 @@ class Index extends AbstractController
             $search->setTypeFilter($this->request->typeFilter);
         }
         
+        if (! empty($this->request->searchString)) {
+            $search->setSearchString($this->request->searchString);
+        }
+        
+        
         $results = $search->getProducts();
         if (! empty($results['data'])) {
             
