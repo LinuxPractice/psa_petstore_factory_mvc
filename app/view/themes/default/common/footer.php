@@ -2,18 +2,18 @@
 	<section>
 		<nav>
 			<div class="row">
-				<div class="col-4 text-center">
+				<div class="col-12 col-sm-4 text-center">
 					<!-- About us link for modal -->
 					<button type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#aboutUs">About Us</button>
 				</div>
-				<div class="col-4 text-center">
+				<div class="col-12 col-sm-4 text-center">
 					<!-- About us link for modal -->
 					<button type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#guarantee">Our Guarantee</button>
 				</div>
 
-				<div class="col-4 text-center">
+				<div class="col-12 col-sm-4 text-center">
 					<!-- Contact us link for modal -->
 					<button type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#contactUs">Contact Us</button>
