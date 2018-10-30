@@ -159,6 +159,7 @@
 									XML</a></li>
 							<li><a class="nav-link" href="/api<?=$_SERVER['REQUEST_URI']?>">View
 									JSON</a></li>
+									<li><a class="nav-link" href="/react<?=$_SERVER['REQUEST_URI']?>">View as a ReactJS App</a></li>
 						</ul>
 					</div>
 
